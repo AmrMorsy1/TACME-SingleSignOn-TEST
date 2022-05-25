@@ -8,7 +8,9 @@ using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-
+using Microsoft.AppCenter:
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Analytics;
 namespace MobileDevOps
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -18,6 +20,8 @@ namespace MobileDevOps
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            AppCenter.Start("App Center Secret", typeof(Analytics), typeof(Crashes));
+            Analytics.TrackEvent("main activity started, appcenternotified");
             SetContentView(Resource.Layout.activity_main);
             Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
